@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+  spark-master:
+    build:
+      context: ./Master
+      dockerfile: Dockerfile
+    environment:
+      - gsy=gsy
+    ports:
+      - "50001:6066"
+      - "50002:7077"   # SPARK_MASTER_PORT
+      - "50003:8080"   # SPARK_MASTER_WEBUI_PORT
+    expose:
+      - 7077
+    
+  spark-worker1:
+    build:
+      context: ./Slaver
+      dockerfile: Dockerfile
+    ports:
+      - "50004:8081"
+    links:
+      - spark-master
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
+
+  spark-worker2:
+    build:
+      context: ./Slaver
+      dockerfile: Dockerfile
+    ports:
+      - "50005:8081"
+    links:
+      - spark-master
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
+
+  spark-worker3:
+    build:
+      context: ./Slaver
+      dockerfile: Dockerfile
+    ports:
+      - "50006:8081"
+    links:
+        - spark-master
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
+
+  spark-worker4:
+    build:
+      context: ./Slaver
+      dockerfile: Dockerfile
+    ports:
+      - "50007:8081"
+    links:
+      - spark-master
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
