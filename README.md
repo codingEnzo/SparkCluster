@@ -40,11 +40,11 @@ SparkCluster 将 Spark 所有组件完整封入 Docker 镜像镜像之中。因�
 
 ##### 1. 项目克隆至本地
 
-`git clone git@xxxxx`
+`git clone git@10.30.2.205:ProjectNewHouse/SparkCluster.git`
 
 ##### 2. 启动
 
-`cd Cluster && docker-compose up -d`
+`cd SparkCluster && docker-compose up -d`
 
 ##### 3. 关闭
 
@@ -52,7 +52,7 @@ SparkCluster 将 Spark 所有组件完整封入 Docker 镜像镜像之中。因�
 
 ### 四、项目设计与结构
 
-**SparkCluster 文件目录树**：
+**i. SparkCluster 文件目录树**：
 
 ```
 .
@@ -81,7 +81,22 @@ SparkCluster 将 Spark 所有组件完整封入 Docker 镜像镜像之中。因�
 - `Logs` 可作为挂载容器内日志的目录；
 - `docker-compose.yml` 集群部署方案。
 
+空间层级：
+
 ![img](./doc/img/DockerSpark.jpg)
+
+SparkCluster 共三层，层级间向上继承。
+
+*温馨提示：* 
+
+> 通常情况下无需修改任何 `Dockerfile`。若需要修改 `Dockerfile`，需要记住修改之后必须重新使用 `docker build -t <ImageName> <Address>`打包，建议自行查阅文档。
+> 
+> 每一层级的 `Dockerfile` 若发生修改，那么其下层都必须重新打包。因此，顶层层级仅部署 Spark、JDK 等耗时且不常修改的底层架构。频繁修改文件，将耗费较大的开销。
+
+
+**ii. SparkCluster 集群内部**
+
+
 
 ### 五、Troubleshooting
 
