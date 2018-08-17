@@ -91,7 +91,7 @@ SparkCluster 共三层，层级间向上继承。
 
 > 通常情况下无需修改任何 `Dockerfile`。若需要修改 `Dockerfile`，需要记住修改之后必须重新使用 `docker build -t <ImageName> <Address>`打包，建议自行查阅文档。
 > 
-> 每一层级的 `Dockerfile` 若发生修改，那么其下层都必须重新打包。因此，顶层层级仅部署 Spark、JDK 等耗时且不常修改的底层架构。频繁修改文件，将耗费较大的开销。
+> 每一层级的 `Dockerfile` 若发生修改，那么其下层都必须重新打包。由于频繁修改文件，将耗费较大的开销。因此，顶层层级仅部署 Spark、JDK 等耗时且不常修改的底层架构。
 
 
 **ii. SparkCluster 集群内部**
