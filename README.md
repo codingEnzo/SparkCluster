@@ -96,7 +96,20 @@ SparkCluster 共三层，层级间向上继承。
 
 **ii. SparkCluster 集群内部**
 
+SparkCluster 采用 standalone 的集群管理。关于 standalone 的逻辑释义如下图：
 
+![standalone](./doc/img/cluster-overview.png)
+
+考虑到公司的设备问题，我们设计时，将 Driver Program 部分分离了出去。因此，SparkCluster 实际上就是 Cluster Manager 和 Worker Node 的容器集群。通过编写 `docker-compose.yml` 定义如下设计。
+
+![internal](./doc/img/internal.png)
+
+**iii. SparkCluster 部署情况**
+
+|服务器|用途|帐号|密码|
+|:---|:---|:---|:---|
+|10.30.1.9|SparkCluster|spark|12345678|
+|10.30.1.10|Driver|driver|python2018|
 
 ### 五、Troubleshooting
 
